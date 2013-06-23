@@ -12,16 +12,23 @@
   <name>storm-rdbms</name>
   <description>Component for RDBMS as a Storm Bolt</description>
 
+  <properties>
+    <storm.version>0.9.0</storm.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  
   <dependencies>
-  	<dependency>
-  	  <groupId>storm</groupId>
-  	  <artifactId>storm</artifactId>
-  	</dependency>
     <dependency>
-       <groupId>mysql</groupId>
-       <artifactId>mysql-connector-java</artifactId>
-       <version>5.1.1</version>
-       <scope>runtime</scope>
+      <groupId>storm</groupId>
+      <artifactId>storm-core</artifactId>
+      <version>${storm.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>5.1.1</version>
+      <scope>runtime</scope>
     </dependency>
     
   </dependencies>
@@ -40,7 +47,4 @@
     </plugins>
   </build>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
 </project>

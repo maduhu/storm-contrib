@@ -10,12 +10,16 @@
   <description>A collection of spouts, bolts, serializers, DSLs, and other goodies to use with Storm</description>
   <url>http://github.com/nathanmarz/storm-contrib</url>
 
+  <properties>
+    <storm.version>0.9.0</storm.version>
+  </properties>
+  
   <dependencyManagement>
     <dependencies>
       <dependency>
         <groupId>storm</groupId>
-        <artifactId>storm</artifactId>
-        <version>0.6.1</version>
+        <artifactId>storm-core</artifactId>
+        <version>${storm.version}</version>
         <scope>provided</scope>
       </dependency>
     </dependencies>
@@ -29,14 +33,14 @@
   </repositories>
 
   <modules>
-    <module>storm-contrib-clockspout</module>
+    <module>storm-jms</module>
+    <!-- <module>storm-clockspout</module> -->
     <module>storm-hbase</module>
-    <module>storm-mongo</module>
+    <!-- <module>storm-mongo</module> -->
     <module>storm-signals</module>
     <module>storm-rdbms</module>
-    <module>storm-cassandra</module>
-    <module>storm-jms</module>
-    <module>storm-growl</module>
+    <!-- <module>storm-cassandra</module> -->
+    <!-- <module>storm-growl</module> -->
     <module>storm-sqs</module>
   </modules>
 </project>
