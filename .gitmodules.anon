@@ -27,7 +27,7 @@
 	url = https://github.com/stormprocessor/storm-sqs.git
 [submodule "storm-hbase"]
 	path = storm-hbase
-	url = https://github.com/stormprocessor/storm-hbase.git
+	url = https://github.com/infochimps-forks/storm-hbase.git
 [submodule "storm-ml"]
 	path = storm-ml
 	url = https://github.com/stormprocessor/storm-ml.git
