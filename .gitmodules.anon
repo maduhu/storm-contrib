@@ -43,3 +43,12 @@
 [submodule "storm-growl"]
 	path = storm-growl
 	url = https://github.com/tjun/storm-growl.git
+[submodule "wiki"]
+	path = wiki
+	url = https://github.com/infochimps-labs/storm.wiki.git
+[submodule "storm-starter"]
+	path = storm-starter
+	url = https://github.com/infochimps-labs/storm-starter.git
+[submodule "jzmq"]
+	path = jzmq
+	url = https://github.com/nathanmarz/jzmq.git
