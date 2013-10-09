@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration scan="true" scanPeriod="5 seconds">
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder><pattern>%7r %m [%30c{1}]%n</pattern></encoder>
+  </appender>
+
+  <appender name="A1" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder><pattern>%7r %m [%30c{1}]%n</pattern></encoder>
+  </appender>
+  
+  <!-- <appender name="A1" class="ch.qos.logback.core.FileAppender"> -->
+  <!--   <file>/tmp/chimpstorm-logs/storm.log</file> -->
+  <!--   <encoder><pattern>%d %-8r %m [%30c{1}]%n</pattern></encoder> -->
+  <!-- </appender>  -->
+
+  <root level="INFO">
+    <appender-ref ref="A1"/>
+  </root>
+
+  <appender name="METRICS" class="ch.qos.logback.core.FileAppender">
+    <file>/tmp/chimpstorm-logs/metrics.log</file>
+    <encoder>
+      <pattern>%d %-8r %m%n</pattern>
+    </encoder>
+  </appender>
+  
+  <root level="INFO">
+    <appender-ref ref="A1"/>
+  </root>
+
+  <logger name="backtype.storm.metric.LoggingMetricsConsumer" additivity="false" >
+    <level value="INFO"/>
+    <appender-ref ref="METRICS"/>
+  </logger>
+ 
+  <logger name="com.infochimps" additivity="false" >
+    <level value="DEBUG"/>
+    <appender-ref ref="CONSOLE"/> <!-- output this to the console and the log --> 
+  </logger>
+
+  <logger name="chimpstorm" additivity="false" >
+    <level value="DEBUG"/>
+    <appender-ref ref="CONSOLE"/> <!-- output this to the console and the log --> 
+  </logger>
+
+  <logger name="backtype.storm.daemon" additivity="false" >
+    <level value="INFO"/>
+  </logger>
+  <logger name="org.apache.zookeeper"     level="WARN"/> 
+  <logger name="backtype.storm.zookeeper" additivity="false" ><level value="WARN"/></logger>
+  <logger name="com.netflix.curator"      additivity="false" ><level value="WARN"/></logger>
+  <logger name="backtype.storm.utils.InstrumentedDisruptorQueue" additivity="false" >
+    <level value="INFO"/>
+  </logger>
+  <logger name="storm.trident.topology.MasterBatchCoordinator" additivity="false" >
+    <level value="INFO"/>
+  </logger>
+  <logger name="storm.trident.topology.TridentBoltExecutor" additivity="false" >
+    <level value="INFO"/>
+  </logger>
+  <logger name="storm.trident.spout.TridentSpoutCoordinator" additivity="false" >
+    <level value="INFO"/>
+  </logger>
+  <logger name="storm.trident.testing.VisibleMemoryMapState" additivity="false">
+    <level value="DEBUG"/>
+    <appender-ref ref="CONSOLE"/> <!-- output this to the console and the log --> 
+  </logger>
+</configuration>

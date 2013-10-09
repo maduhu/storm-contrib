@@ -1,0 +1,62 @@
+package storm.trident.testing;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import backtype.storm.task.IMetricsContext;
+import backtype.storm.tuple.Values;
+import backtype.storm.utils.Utils;
+
+import storm.trident.state.ITupleCollection;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
+import storm.trident.testing.MemoryMapState;
+import storm.trident.state.OpaqueValue;
+import storm.trident.state.State;
+import storm.trident.state.StateFactory;
+import storm.trident.state.ValueUpdater;
+import storm.trident.state.map.*;
+import storm.trident.state.snapshot.Snapshottable;
+
+public class VisibleMemoryMapState<T> extends MemoryMapState<T> {
+  // static final Logger LOG = LoggerFactory.getLogger(VisibleMemoryMapState.class);
+  
+  public VisibleMemoryMapState(String id) {
+    super(id);
+    System.out.println("Great scott!, I WAS JUST CALLED");
+    // LOG.warn("ZOMG GOT CALLED");
+    super._backing = new VisibleMemoryMapStateBacking(id);
+    super._delegate = new SnapshottableMap(OpaqueMap.build(super._backing), new Values("$MEMORY-MAP-STATE-GLOBAL$"));
+  }
+
+  public static class VisibleMemoryMapStateBacking<T> extends MemoryMapStateBacking<T> {
+    static final Logger LOG = LoggerFactory.getLogger(VisibleMemoryMapStateBacking.class);
+    String _id;
+
+    public VisibleMemoryMapStateBacking(String id){
+      super(id);
+      LOG.info("WOOTMARKS just got called");
+      _id = id;
+    }
+
+    @Override
+    public List<T> multiGet(List<List<Object>> keys) {
+      if (LOG.isDebugEnabled()) {
+        System.out.println("multiGet got called FOOL");
+        LOG.warn(Utils.logString("MemoryMapState.multiGet", _id, "",
+              "key size", ""+keys.size(), "payload", keys.toString()));
+      }
+      return super.multiGet(keys);
+    }
+
+    @Override
+    public void multiPut(List<List<Object>> keys, List<T> vals) {
+      if (LOG.isDebugEnabled()) {
+        LOG.debug(Utils.logString("MemoryMapState.multiPut", _id, "",
+              "key size", "" + keys.size(), "payload", vals.toString()));
+      }
+      super.multiPut(keys, vals);
+    }
+  }
+}
